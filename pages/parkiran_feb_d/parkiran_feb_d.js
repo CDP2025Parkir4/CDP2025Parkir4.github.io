@@ -1,6 +1,6 @@
 import '../../realtime.js';
 import { getState, getAvailableCount, subscribe } from '../../data/store.js';
-const LOT_ID = 'filkom';
+const LOT_ID = 'feb1';
 
 function renderCount() {
   const el = document.getElementById('availableCount');
@@ -19,14 +19,10 @@ function hydrateButtons() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // pastikan state ada
   getState();
-
-  // set tampilan awal
   hydrateButtons();
   renderCount();
 
-  // kalau ada update dari halaman lain, refresh UI
   subscribe(() => {
     hydrateButtons();
     renderCount();

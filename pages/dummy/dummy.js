@@ -1,6 +1,7 @@
+// pages/parkiran_filkom/app.js
 import '../../realtime.js';
-import { getState, getAvailableCount, subscribe } from '../../data/store.js';
-const LOT_ID = 'filkom';
+import { getState, toggleSpot, getAvailableCount, subscribe } from '../../data/store.js';
+const LOT_ID = 'dummy';
 
 function renderCount() {
   const el = document.getElementById('availableCount');
@@ -25,6 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // set tampilan awal
   hydrateButtons();
   renderCount();
+
+  // interaksi toggle
+  document.getElementById('spotsGrid')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.spot');
+    if (!btn) return;
+    const code = btn.dataset.id;
+    try {
+      toggleSpot(LOT_ID, code); // update state + broadcast
+    } catch (err) {
+      console.error('[dummy] toggleSpot failed:', err);
+    }
+    // Force re-hydrate so UI selalu pakai state terbaru.
+    hydrateButtons();
+    renderCount();
+  });
 
   // kalau ada update dari halaman lain, refresh UI
   subscribe(() => {

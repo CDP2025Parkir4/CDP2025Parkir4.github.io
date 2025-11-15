@@ -1,6 +1,6 @@
 import '../../realtime.js';
 import { getState, getAvailableCount, subscribe } from '../../data/store.js';
-const LOT_ID = 'filkom';
+const LOT_ID = 'sakri';
 
 function renderCount() {
   const el = document.getElementById('availableCount');
